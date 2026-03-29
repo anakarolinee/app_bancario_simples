@@ -11,7 +11,7 @@ export function DashboardPage() {
     const { balance, transactions, user } = useBankStore();
     const [showBalance, setShowBalance] = useState(true);
 
-    const sortedTransactions = [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const sortedTransactions = [...transactions].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     const formatCurrency = (value: number) => {
         
