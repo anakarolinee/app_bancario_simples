@@ -24,27 +24,35 @@ export function DashboardPage() {
         <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-6">
 
             {/* Header com Saudação e Logout (Opcional) */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
+                <div className="space-y-1">
+                    <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                         Olá, {user?.name || 'AKDever'}
                     </h1>
-                    <p className="text-slate-500 text-sm">Bem-vindo ao seu banco digital.</p>
+                    <p className="text-slate-500 text-xs sm:text-sm">Bem-vindo ao seu banco digital.</p>
                 </div>
-                <Button asChild className="group bg-slate-600 hover:bg-indigo-700 text-white font-semibold rounded-full p-6 shadow-lg shadow-slate-200 transition-all active:scale-95 overflow-hidden border-none">
+
+                <Button
+                    asChild
+                    className="w-full sm:w-auto group bg-slate-600 hover:bg-indigo-700 text-white font-semibold rounded-xl sm:rounded-full p-5 sm:p-6 shadow-lg shadow-slate-200 transition-all active:scale-95 overflow-hidden border-none"
+                >
                     <Link to="/transfer">
-                        <span className="flex items-center gap-2 relative">
-                            <div className="relative w-6 h-6 flex items-center justify-center">
-                                {/* Ícone Padrão (+) */}
-                                <Plus size={22} className="absolute transition-all duration-300 group-hover:opacity-0 group-hover:scale-50" />
-                                {/* Ícone Pix (Aparece no Hover) */}
-                                <SendHorizontal size={22} className="absolute opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 text-emerald-400" />
+                        <span className="flex items-center justify-center gap-2 relative w-full">
+                            <div className="relative w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center shrink-0">
+                                <Plus size={20} className="absolute transition-all duration-300 group-hover:opacity-0 group-hover:scale-50 sm:size-[22px]" />
+                                <SendHorizontal size={20} className="absolute opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 text-emerald-400 sm:size-[22px]" />
                             </div>
-                            <span className="text-lg">Nova Transferência</span>
+
+                            {/* Texto Curto: Aparece apenas em telas pequenas (abaixo de 640px) */}
+                            <span className="text-base block sm:hidden">Transferir</span>
+
+                            {/* Texto Longo: Escondido em mobile, aparece do 'sm' para cima */}
+                            <span className="text-lg hidden sm:block">Pix e Transfererir</span>
                         </span>
                     </Link>
                 </Button>
             </div>
+
 
             {/* Card de Saldo Usando o Componente Card do Shadcn */}
             <Card className="border-none shadow-md bg-[#58bd7d]">

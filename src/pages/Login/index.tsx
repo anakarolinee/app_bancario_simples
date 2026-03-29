@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { Sparkles } from "lucide-react";
 
 // 1. Schema de Validação com Zod
 const loginSchema = z.object({
-    email: z.string().email('Insere um email válido'),
+    email: z.string().email('Insira um email válido'),
     password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres'),
 });
 
@@ -26,23 +26,21 @@ export function LoginPage() {
     const {
         register,
         handleSubmit,
-        watch,
+        control,
         formState: { errors, isSubmitting },
     } = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
         mode: 'onChange',
     });
 
-    const watchedEmail = watch('email');
-    const watchedPassword = watch('password');
+    const watchedEmail = useWatch({ control, name: 'email' });
+    const watchedPassword = useWatch({ control, name: 'password' });
 
-    // 3. Simulação de Login (Mock)
     const onSubmit = async (data: LoginFormValues) => {
         // Simula um delay de rede
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        // Mock de sucesso: salva na store e redireciona
-        login({ id: '1', name: 'Ana', email: data.email });
+        login({ id: '1', name: 'AKDever', email: data.email });
         navigate('/dashboard');
     };
 
@@ -50,14 +48,14 @@ export function LoginPage() {
         <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
             <div className="w-full max-w-md space-y-8 rounded-xl bg-white p-8 shadow-lg border border-slate-200">
                 <div className="text-center">
-                        <div className="items-center">
-                            <div className='justify-center flex'>
+                    <div className="items-center">
+                        <div className='justify-center flex'>
                             <Sparkles className="h-6 w-6 text-[#58bd7d] fill-[#58bd7d]" />
-                            </div>
-                            <h1 className="text-xl font-semibold text-slate-900">
-                                AKDev <span className="font-light text-slate-400">Bank</span>
-                            </h1>
-                        </div>  
+                        </div>
+                        <h1 className="text-xl font-semibold text-slate-900">
+                            AKDev <span className="font-light text-slate-400">Bank</span>
+                        </h1>
+                    </div>
                     <p className="text-sm text-slate-500">Introduza os seus dados abaixo e faça login</p>
                 </div>
 

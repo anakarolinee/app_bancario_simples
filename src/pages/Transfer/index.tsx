@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useNavigate } from 'react-router-dom';
@@ -27,12 +27,13 @@ export function TransferPage() {
         handleSubmit,
         control,
         trigger,
-        watch,
         formState: { errors, isSubmitting },
     } = useForm<TransferFormValues>({
         resolver: zodResolver(transferSchema),
         defaultValues: { amount: 0, title: '' }
     });
+
+    const watchedTitle = useWatch({ control, name: 'title' });
 
     const nextStep = async () => {
         const isValid = await trigger('title');
@@ -43,7 +44,7 @@ export function TransferPage() {
         if (data.amount > balance) {
             // 2. Toast de Erro (Saldo insuficiente)
             toast.error("Saldo insuficiente", {
-                description: "Você não possui saldo para esta operação."
+                description: "Você não possui saldo o suficiente para está operação."
             });
             return;
         }
@@ -59,7 +60,7 @@ export function TransferPage() {
 
             // 3. Toast de Sucesso
             toast.success("Transferência realizada!", {
-                description: `R$ ${data.amount.toLocaleString()} enviado para ${data.title}`
+                description: `R$ ${data.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} enviado para ${data.title}`
             });
 
             navigate('/dashboard');
@@ -96,14 +97,14 @@ export function TransferPage() {
                         <div className="space-y-4">
                             <h1 className="text-2xl font-semibold text-slate-900">Para quem você quer transferir?</h1>
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 text-left">Nome, CPF ou Chave Pix</label>
+                                <label className="block text-sm font-medium text-slate-700 text-left">Nome, CPF/CNPJ ou Chave Pix</label>
                                 <Input
                                     {...register('title')}
-                                    placeholder="Celular, CPF/CNPJ, Email..."
+                                    placeholder="Celular, Email, Pix copia e cola..."
                                     className="mt-2 h-12 text-lg rounded-xl"
                                     autoFocus
                                 />
-                                {errors.title && <p className="text-red-500 text-xs mt-1 text-left">{errors.title.message}</p>}
+                                {errors.title && <p className="text-md text-gray-600 mt-1 text-left">{errors.title.message}</p>}
                             </div>
                             <Button
                                 type="button"
@@ -118,7 +119,7 @@ export function TransferPage() {
                     {step === 2 && (
                         <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
                             <div className="text-center">
-                                <p className="text-sm text-slate-500">Transferindo para <span className="font-bold text-slate-800">{watch('title')}</span></p>
+                                <p className="text-sm text-slate-500">Transferindo para <span className="font-bold text-slate-800">{watchedTitle}</span></p>
                                 <h1 className="text-2xl font-semibold text-slate-900 mt-1">Quanto você quer transferir?</h1>
                             </div>
 
@@ -136,15 +137,16 @@ export function TransferPage() {
                                             decimalScale={2}
                                             fixedDecimalScale
                                             autoFocus
+                                            placeholder="R$ 0,00"
                                             value={value === 0 ? '' : value}
                                             onValueChange={(values) => onChange(values.floatValue || 0)}
                                             isAllowed={(values) => (values.value.length <= 11)}
-                                            className="mt-1 w-full !text-4xl font-bold h-32 text-center border-none focus-visible:ring-0 bg-transparent shadow-none"
+                                            className="mt-1 w-full !text-4xl placeholder:text-slate-200 font-bold h-32 text-center border-none focus-visible:ring-0 bg-transparent shadow-none"
                                         />
                                     )}
                                 />
                                 <p className="text-center text-sm text-slate-500 mt-2">Saldo disponível: R$ {balance.toLocaleString()}</p>
-                                {errors.amount && <p className="text-red-500 text-center text-sm mt-1">{errors.amount.message}</p>}
+                                {errors.amount && <p className="text-md text-gray-600 text-center mt-1">{errors.amount.message}</p>}
                             </div>
 
                             <Button

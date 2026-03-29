@@ -31,21 +31,28 @@ export const useBankStore = create<BankState>()(
     persist(
         (set) => ({
             user: null,
-            balance: 5000, 
+            balance: 5000,
             transactions: [
                 {
                     id: '1',
                     title: 'Depósito Inicial',
                     amount: 500,
                     type: 'income',
-                    date: '2023-10-01T10:00:00.000Z',
+                    date: '2026-10-01T10:00:00.000Z',
                 },
                 {
                     id: '2',
                     title: 'Compra no Supermercado',
                     amount: 150,
                     type: 'outcome',
-                    date: '2023-10-02T14:30:00.000Z',
+                    date: '2026-10-02T14:30:00.000Z',
+                },
+                {
+                    id: '3',
+                    title: 'Depósito Inicial',
+                    amount: 500,
+                    type: 'income',
+                    date: '2026-10-01T10:00:00.000Z',
                 },
             ],
             isAuthenticated: false,
@@ -78,7 +85,7 @@ export const useBankStore = create<BankState>()(
             }),
         }),
         {
-            name: 'bank-storage-v2',
+            name: 'bank-storage',
         }
     )
 );
