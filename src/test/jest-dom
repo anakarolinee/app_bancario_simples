@@ -1,0 +1,16 @@
+// src/test/setup.ts
+import '@testing-library/jest-dom'
+import { vi } from 'vitest'
+
+// Exemplo de mock global do axios se necessário
+vi.mock('axios', () => ({
+    default: {
+        get: vi.fn(),
+        post: vi.fn(),
+        create: vi.fn().mockReturnThis(),
+        interceptors: {
+            request: { use: vi.fn(), eject: vi.fn() },
+            response: { use: vi.fn(), eject: vi.fn() },
+        },
+    },
+}))
