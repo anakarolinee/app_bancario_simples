@@ -28,7 +28,7 @@ export const useAuthStore = create<AuthState>()(
             logout: () => set({ user: null, isAuthenticated: false }),
         }),
         {
-            name: 'auth-storage', // Nome da chave no LocalStorage
+            name: 'bank-storage', // Nome da chave no LocalStorage
         }
     )
 );

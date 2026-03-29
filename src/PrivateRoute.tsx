@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from './store/authStore';
 import { Button } from "@/components/ui/button";
 import { Sparkles, LogOut } from "lucide-react";
 import {

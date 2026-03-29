@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { LoginPage } from './pages/Login'
 import { DashboardPage } from './pages/Dashboard'
 import { TransferPage } from './pages/Transfer'
-import { PrivateRoute } from './components/PrivateRoute'
+import { PrivateRoute } from './PrivateRoute'
 
 export const router = createBrowserRouter([
     {

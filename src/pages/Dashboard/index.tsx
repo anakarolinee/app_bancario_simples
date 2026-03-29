@@ -7,13 +7,14 @@ import { Eye, EyeOff } from 'lucide-react';
 import { Plus, SendHorizontal } from 'lucide-react';
 import { ArrowDownCircle, ArrowUpCircle } from 'lucide-react';
 export function DashboardPage() {
+
     const { balance, transactions, user } = useBankStore();
     const [showBalance, setShowBalance] = useState(true);
-
 
     const sortedTransactions = [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
     const formatCurrency = (value: number) => {
+        
         return new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
