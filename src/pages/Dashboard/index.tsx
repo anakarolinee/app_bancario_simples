@@ -6,20 +6,53 @@ import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Plus, SendHorizontal } from 'lucide-react';
 import { ArrowDownCircle, ArrowUpCircle } from 'lucide-react';
+import { Globe, Zap, ArrowRight, Bitcoin } from 'lucide-react';
+
 export function DashboardPage() {
 
     const { balance, transactions, user } = useBankStore();
     const [showBalance, setShowBalance] = useState(true);
 
-    const sortedTransactions = [...transactions].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    // B - A = Mais recentes (maior timestamp) primeiro
+    const sortedTransactions = [...transactions].sort((a, b) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
 
     const formatCurrency = (value: number) => {
-        
+
         return new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         }).format(value);
     };
+
+    const formatDate = (date: string) => {
+        const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        const transactionDate = new Date(date);
+
+        // Formata a hora separadamente para reutilizar
+        const timeString = transactionDate.toLocaleTimeString('pt-BR', {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+
+        if (transactionDate.toDateString() === today.toDateString()) {
+            return `hoje às ${timeString}`; // Agora inclui a hora
+        } else if (transactionDate.toDateString() === yesterday.toDateString()) {
+            return `ontem às ${timeString}`; // Agora inclui a hora
+        } else {
+            return transactionDate.toLocaleString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+    };
+
 
     return (
         <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-6">
@@ -27,10 +60,10 @@ export function DashboardPage() {
             {/* Header com Saudação e Logout (Opcional) */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
                 <div className="space-y-1">
-                    <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
                         Olá, {user?.name || 'AKDever'}
                     </h1>
-                    <p className="text-slate-500 text-xs sm:text-sm">Bem-vindo ao seu banco digital.</p>
+                    <p className="text-slate-500 text-sm sm:text-sm">Bem-vindo ao seu banco digital.</p>
                 </div>
 
                 <Button
@@ -79,7 +112,50 @@ export function DashboardPage() {
                     </h2>
                 </CardContent>
             </Card>
+            <Card className="border-none overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white shadow-xl">
+                <CardContent className="p-6 sm:p-8 relative">
+                    {/* Elemento Decorativo de Fundo (Círculo de Brilho) */}
+                    <div className="absolute top-[-20%] right-[-10%] w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl" />
 
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                        <div className="space-y-4 text-center md:text-left flex-1">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                                <Zap size={14} className="fill-emerald-400" />
+                                Novo: Conta Global + Cripto
+                            </div>
+
+                            <h2 className="text-2xl sm:text-3xl font-bold leading-tight">
+                                O mundo na sua mão, <br />
+                                <span className="text-emerald-400">ativos digitais</span> no seu bolso.
+                            </h2>
+
+                            <p className="text-slate-400 text-sm sm:text-base max-w-md">
+                                Converta Real para Dólar ou Cripto instantaneamente com as menores taxas do mercado global.
+                            </p>
+
+                            <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-2">
+                                <Button className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-full px-6 transition-all active:scale-95">
+                                    Explorar Cripto
+                                </Button>
+                                <Button variant="ghost" className="text-white hover:bg-white/10 gap-2">
+                                    Saber mais <ArrowRight size={18} />
+                                </Button>
+                            </div>
+                        </div>
+
+                        {/* Ícones/Visual do Lado Direito */}
+                        <div className="hidden sm:flex items-center justify-center relative w-32 h-32 md:w-40 md:h-40">
+                            <div className="absolute animate-pulse">
+                                <Globe size={80} className="text-indigo-400/20" />
+                            </div>
+                            <div className="bg-slate-800 p-4 rounded-2xl border border-white/10 shadow-2xl rotate-12 hover:rotate-0 transition-transform duration-500">
+                                <Bitcoin size={48} className="text-emerald-400" />
+                            </div>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+            
             {/* Lista de Transações */}
             <Card className="">
                 <CardHeader>
@@ -108,10 +184,7 @@ export function DashboardPage() {
                                         <div className="space-y-1">
                                             <p className="font-medium text-slate-800 leading-none">{t.title}</p>
                                             <p className="text-xs text-slate-500">
-                                                {new Date(t.date).toLocaleDateString('pt-BR', {
-                                                    day: '2-digit',
-                                                    month: 'long'
-                                                })}
+                                                {formatDate(t.date)}
                                             </p>
                                         </div>
                                     </div>

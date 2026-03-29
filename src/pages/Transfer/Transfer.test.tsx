@@ -37,6 +37,12 @@ describe('TransferPage', () => {
         vi.mocked(useBankStore).mockReturnValue({
             addTransaction: vi.fn().mockResolvedValue(true),
             balance: 1000,
+            getRecipientDetails: vi.fn((title) => ({
+                name: title,
+                account: '12345-6',
+                bank: 'Banco Global',
+                pixKey: 'test@email.com'
+            })),
         });
     });
 
@@ -54,17 +60,27 @@ describe('TransferPage', () => {
         // PASSO 1: Identificação do destinatário
         // Busca o campo pelo texto de ajuda (placeholder) e digita o nome
         const titleInput = screen.getByPlaceholderText('Celular, Email, Pix copia e cola...');
-        await user.type(titleInput, 'Ana Karoline');
+        await user.type(titleInput, 'João Silva');
 
         // Clica no botão "Continuar" para avançar de etapa
         const continueButton = screen.getByRole('button', { name: /continuar/i });
         await user.click(continueButton);
 
-        // PASSO 2: Definição do valor e Validação visual
+        // PASSO 2: Confirmação do destinatário
+        // Aguarda a interface mudar e verifica se o título de confirmação aparece
+        await waitFor(() => {
+            expect(screen.getByText('Confirme o destinatário')).toBeInTheDocument();
+            expect(screen.getByText('João Silva')).toBeInTheDocument();
+        });
+
+        // Clica no botão "Confirmar e Continuar" para avançar para o valor
+        const confirmRecipientButton = screen.getByRole('button', { name: /confirmar e continuar/i });
+        await user.click(confirmRecipientButton);
+
+        // PASSO 3: Definição do valor e Validação visual
         // Aguarda a interface mudar e verifica se o título e o nome do destinatário aparecem
         await waitFor(() => {
             expect(screen.getByText('Quanto você quer transferir?')).toBeInTheDocument();
-            expect(screen.getByText(/Ana Karoline/i)).toBeInTheDocument();
         });
 
         // Localiza o campo de valor (input numérico) e digita a quantia

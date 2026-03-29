@@ -120,31 +120,6 @@ Essas práticas, combinadas com revisões de segurança regulares e testes de pe
 - `npm run test` - Executa os testes com Vitest
 - `npm run lint` - Executa o linter ESLint
 
-## 📁 Estrutura do Projeto
-
-```text
-src/
-├── components/          # Componentes reutilizáveis
-│   ├── ui/             # Componentes base shadcn/ui
-│   ├── Header.tsx      # Cabeçalho da aplicação
-│   └── PrivateRoute.tsx # Rota protegida
-├── pages/              # Páginas da aplicação
-│   ├── Login/          # Página de login
-│   ├── Dashboard/      # Dashboard principal
-│   └── Transfer/       # Página de transferências
-├── store/              # Gerenciamento de estado
-│   ├── useAuthStore.ts # Store de autenticação
-│   └── useBankStore.ts # Store de dados bancários
-├── hooks/              # Hooks customizados
-├── lib/                # Utilitários
-│   ├── axios.ts        # Configuração do Axios
-│   └── utils.ts        # Funções utilitárias
-├── styles/             # Estilos globais
-├── test/               # Configurações de teste
-├── App.tsx             # Componente raiz
-├── main.tsx            # Ponto de entrada
-└── routes.tsx          # Configuração de rotas
-```
 
 ## 🧪 Testes
 

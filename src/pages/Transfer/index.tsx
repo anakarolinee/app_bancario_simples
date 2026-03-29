@@ -19,7 +19,7 @@ type TransferFormValues = z.infer<typeof transferSchema>;
 
 export function TransferPage() {
     const navigate = useNavigate();
-    const { addTransaction, balance } = useBankStore();
+    const { addTransaction, balance, getRecipientDetails } = useBankStore();
     const [step, setStep] = useState(1);
 
     const {
@@ -36,8 +36,12 @@ export function TransferPage() {
     const watchedTitle = useWatch({ control, name: 'title' });
 
     const nextStep = async () => {
-        const isValid = await trigger('title');
-        if (isValid) setStep(2);
+        if (step === 1) {
+            const isValid = await trigger('title');
+            if (isValid) setStep(2);
+        } else if (step === 2) {
+            setStep(3);
+        }
     };
 
     const onSubmit = async (data: TransferFormValues) => {
@@ -75,12 +79,14 @@ export function TransferPage() {
         <div className="flex items-center justify-center p-8">
             <div className="w-full max-w-md bg-white rounded-xl shadow-lg border border-slate-200 p-8">
 
-                {(step === 1 || step === 2) && (
+                {(step === 1 || step === 2 || step === 3) && (
                     <button
                         type="button"
                         onClick={() => {
                             if (step === 2) {
                                 setStep(1);
+                            } else if (step === 3) {
+                                setStep(2);
                             } else {
                                 navigate('/dashboard'); // Sai da página de transferência
                             }
@@ -117,6 +123,35 @@ export function TransferPage() {
                     )}
 
                     {step === 2 && (
+                        <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+                            <h1 className="text-2xl font-semibold text-slate-900 text-center">Confirme o destinatário</h1>
+
+                            <div className="bg-slate-50 p-4 rounded-lg border">
+                                <p className="text-sm text-slate-600 mb-2">Destinatário:</p>
+                                {(() => {
+                                    const recipient = getRecipientDetails(watchedTitle);
+                                    return (
+                                        <div className="space-y-1">
+                                            <p className="font-semibold text-slate-800">{recipient.name}</p>
+                                            <p className="text-sm text-slate-500">Conta: {recipient.account}</p>
+                                            <p className="text-sm text-slate-500">Banco: {recipient.bank}</p>
+                                            <p className="text-sm text-slate-500">Chave Pix: {recipient.pixKey}</p>
+                                        </div>
+                                    );
+                                })()}
+                            </div>
+
+                            <Button
+                                type="button"
+                                onClick={nextStep}
+                                className="bg-[#58bd7d] text-[#fcfcfd] hover:brightness-90 rounded-full w-full py-6 text-lg font-semibold cursor-pointer transition-all"
+                            >
+                                Confirmar e Continuar
+                            </Button>
+                        </div>
+                    )}
+
+                    {step === 3 && (
                         <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
                             <div className="text-center">
                                 <p className="text-sm text-slate-500">Transferindo para <span className="font-bold text-slate-800">{watchedTitle}</span></p>

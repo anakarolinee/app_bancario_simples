@@ -16,6 +16,13 @@ interface Transaction {
     date: string;
 }
 
+interface RecipientDetails {
+    name: string;
+    account: string;
+    bank: string;
+    pixKey: string;
+}
+
 interface BankState {
     user: User | null;
     balance: number;
@@ -25,6 +32,7 @@ interface BankState {
     logout: () => void;
     updateBalance: (amount: number) => void;
     addTransaction: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
+    getRecipientDetails: (title: string) => RecipientDetails;
 }
 
 export const useBankStore = create<BankState>()(
@@ -36,23 +44,30 @@ export const useBankStore = create<BankState>()(
                 {
                     id: '1',
                     title: 'Depósito Inicial',
-                    amount: 500,
+                    amount: 2000,
                     type: 'income',
-                    date: '2026-10-01T10:00:00.000Z',
+                    date: '2026-01-23T13:45:00.000Z', 
                 },
                 {
                     id: '2',
                     title: 'Compra no Supermercado',
                     amount: 150,
                     type: 'outcome',
-                    date: '2026-10-02T14:30:00.000Z',
+                    date: '2026-02-04T14:30:00.000Z',
                 },
                 {
-                    id: '3',
-                    title: 'Depósito Inicial',
+                    id: '3', // ID único
+                    title: 'Venda de Monitor',
+                    amount: 600,
+                    type: 'income',
+                    date: '2026-03-01T20:00:00.000Z',
+                },
+                {
+                    id: '4', // ID único
+                    title: 'Bónus Mensal',
                     amount: 500,
                     type: 'income',
-                    date: '2026-10-01T10:00:00.000Z',
+                    date: '2026-03-15T08:00:00.000Z', 
                 },
             ],
             isAuthenticated: false,
@@ -83,6 +98,15 @@ export const useBankStore = create<BankState>()(
                     balance: state.balance + balanceChange,
                 };
             }),
+
+            getRecipientDetails: (title: string) => {
+                const recipients: Record<string, RecipientDetails> = {
+                    'João Silva': { name: 'João Silva', account: '12345-6', bank: 'Banco Global', pixKey: 'joao@email.com' },
+                    'Maria Santos': { name: 'Maria Santos', account: '65432-1', bank: 'Banco Nacional', pixKey: 'maria@cel.com' },
+                    'Empresa XYZ': { name: 'Empresa XYZ Ltda', account: '98765-4', bank: 'Banco Empresarial', pixKey: 'empresa@xyz.com' },
+                };
+                return recipients[title] || { name: title, account: 'xxxx', bank: 'xxxxxx', pixKey: title };
+            },
         }),
         {
             name: 'bank-storage',
