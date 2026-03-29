@@ -1,4 +1,4 @@
-# Onda Finance - Frontend Challenge
+# AKDev Bank - Banco digital
 
 Este é um projeto de desafio frontend para simular uma aplicação bancária simples, desenvolvido com React, TypeScript e Vite. O objetivo é demonstrar habilidades em desenvolvimento de interfaces modernas, gerenciamento de estado, autenticação e operações bancárias básicas.
 
@@ -184,8 +184,8 @@ Este projeto é privado e destinado apenas para fins de avaliação do desafio.
 
 ## 👥 Autor
 
-Desenvolvido como parte do desafio frontend para Onda Finance.
-
+Dev Ana Karoline 
+Linkedin: <https://www.linkedin.com/in/ana-karoline-araujo/>
 ---
 
 **Nota**: Esta é uma aplicação de demonstração e não representa um sistema bancário real. Todos os dados são simulados e não persistem em um banco de dados.
