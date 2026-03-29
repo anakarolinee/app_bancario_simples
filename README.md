@@ -137,10 +137,6 @@ Para executar testes em modo watch:
 npm run test -- --watch
 ```
 
-## 🚀 Aplicação Publicada
-
-A aplicação está disponível online para demonstração em: [Acessar Aplicação](https://onda-finance-challenge.vercel.app) (link de exemplo - substitua pelo link real se aplicável).
-
 ## 📋 Decisões Técnicas Adotadas
 
 Durante o desenvolvimento, foram tomadas as seguintes decisões técnicas para garantir qualidade, performance e manutenibilidade:
@@ -170,22 +166,11 @@ O projeto pode ser expandido com as seguintes melhorias:
 - **Performance**: Implementar lazy loading, code splitting e otimização de imagens.
 - **Acessibilidade**: Melhorar conformidade com WCAG para usuários com deficiências.
 
-## 🤝 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto é privado e destinado apenas para fins de avaliação do desafio.
 
 ## 👥 Autor
 
-Dev Ana Karoline 
-Linkedin: <https://www.linkedin.com/in/ana-karoline-araujo/>
+- Dev Ana Karoline 
+- Linkedin: <https://www.linkedin.com/in/ana-karoline-araujo/>
 ---
 
 **Nota**: Esta é uma aplicação de demonstração e não representa um sistema bancário real. Todos os dados são simulados e não persistem em um banco de dados.
