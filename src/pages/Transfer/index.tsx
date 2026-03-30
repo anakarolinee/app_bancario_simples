@@ -62,7 +62,6 @@ export function TransferPage() {
                 type: 'outcome'
             });
 
-            // 3. Toast de Sucesso
             toast.success("Transferência realizada!", {
                 description: `R$ ${data.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} enviado para ${data.title}`
             });
@@ -88,7 +87,7 @@ export function TransferPage() {
                             } else if (step === 3) {
                                 setStep(2);
                             } else {
-                                navigate('/dashboard'); // Sai da página de transferência
+                                navigate('/dashboard'); 
                             }
                         }}
                         className="flex items-center text-slate-500 mb-4 hover:text-slate-800 transition-colors group"

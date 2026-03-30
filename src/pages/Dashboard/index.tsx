@@ -33,7 +33,6 @@ export function DashboardPage() {
         yesterday.setDate(yesterday.getDate() - 1);
         const transactionDate = new Date(date);
 
-        // Formata a hora separadamente para reutilizar
         const timeString = transactionDate.toLocaleTimeString('pt-BR', {
             hour: '2-digit',
             minute: '2-digit',
@@ -57,7 +56,6 @@ export function DashboardPage() {
     return (
         <div className="max-w-4xl mx-auto p-4 md:p-8 space-y-6">
 
-            {/* Header com Saudação e Logout (Opcional) */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
                 <div className="space-y-1">
                     <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
@@ -77,10 +75,8 @@ export function DashboardPage() {
                                 <SendHorizontal size={20} className="absolute opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 text-emerald-400 sm:size-[22px]" />
                             </div>
 
-                            {/* Texto Curto: Aparece apenas em telas pequenas (abaixo de 640px) */}
                             <span className="text-base block sm:hidden">Transferir</span>
 
-                            {/* Texto Longo: Escondido em mobile, aparece do 'sm' para cima */}
                             <span className="text-lg hidden sm:block">Pix e Transfererir</span>
                         </span>
                     </Link>
@@ -88,7 +84,6 @@ export function DashboardPage() {
             </div>
 
 
-            {/* Card de Saldo Usando o Componente Card do Shadcn */}
             <Card className="border-none shadow-md bg-[#58bd7d]">
                 <CardHeader className=" flex justify-between items-center">
                     <CardTitle className="text-sm font-medium text-white uppercase tracking-wide">
@@ -114,7 +109,7 @@ export function DashboardPage() {
             </Card>
             <Card className="border-none overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white shadow-xl">
                 <CardContent className="p-6 sm:p-8 relative">
-                    {/* Elemento Decorativo de Fundo (Círculo de Brilho) */}
+
                     <div className="absolute top-[-20%] right-[-10%] w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl" />
 
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
@@ -143,7 +138,6 @@ export function DashboardPage() {
                             </div>
                         </div>
 
-                        {/* Ícones/Visual do Lado Direito */}
                         <div className="hidden sm:flex items-center justify-center relative w-32 h-32 md:w-40 md:h-40">
                             <div className="absolute animate-pulse">
                                 <Globe size={80} className="text-indigo-400/20" />
@@ -156,7 +150,6 @@ export function DashboardPage() {
                 </CardContent>
             </Card>
             
-            {/* Lista de Transações */}
             <Card className="">
                 <CardHeader>
                     <CardTitle className="text-lg font-semibold">Histórico de Transações</CardTitle>
@@ -169,7 +162,7 @@ export function DashboardPage() {
                             {sortedTransactions.map((t) => (
                                 <div key={t.id} className="p-4 flex justify-between items-center hover:bg-slate-50 transition-colors">
                                     <div className="flex items-center gap-4">
-                                        {/* ÍCONE DE STATUS */}
+
                                         <div className={`p-2 rounded-full ${t.type === 'income'
                                             ? 'bg-emerald-50 text-emerald-600'
                                             : 'bg-gray-50 text-gray-400'

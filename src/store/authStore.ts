@@ -1,14 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-// 1. Definir o que o Utilizador tem
 interface User {
     id: string;
     name: string;
     email: string;
 }
 
-// 2. Definir o formato da Store
 interface AuthState {
     user: User | null;
     isAuthenticated: boolean;
@@ -16,7 +14,6 @@ interface AuthState {
     logout: () => void;
 }
 
-// 3. Criar a Store com Persistência (para não deslogar ao dar F5)
 export const useAuthStore = create<AuthState>()(
     persist(
         (set) => ({
@@ -28,7 +25,7 @@ export const useAuthStore = create<AuthState>()(
             logout: () => set({ user: null, isAuthenticated: false }),
         }),
         {
-            name: 'bank-storage', // Nome da chave no LocalStorage
+            name: 'bank-storage', 
         }
     )
 );

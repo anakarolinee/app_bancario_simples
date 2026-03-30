@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sparkles } from "lucide-react";
 
-// 1. Schema de Validação com Zod
 const loginSchema = z.object({
     email: z.string().email('Insira um email válido'),
     password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres'),
@@ -22,7 +21,6 @@ export function LoginPage() {
     const login = useAuthStore((state) => state.login);
     const [showPassword, setShowPassword] = useState(false);
 
-    // 2. Setup do Form
     const {
         register,
         handleSubmit,
@@ -37,7 +35,7 @@ export function LoginPage() {
     const watchedPassword = useWatch({ control, name: 'password' });
 
     const onSubmit = async (data: LoginFormValues) => {
-        // Simula um delay de rede
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         login({ id: '1', name: 'AKDever', email: data.email });

@@ -30,7 +30,7 @@ vi.mock('sonner', () => ({
 
 describe('TransferPage', () => {
     beforeEach(() => {
-        // Limpa todos os mocks antes de cada teste
+
         vi.clearAllMocks();
 
         // Define um saldo inicial de 1000 para a store simulada
@@ -47,18 +47,16 @@ describe('TransferPage', () => {
     });
 
     it('should complete the transfer flow correctly', async () => {
-        // Configura o disparador de eventos do usuário (clique, digitação, etc)
+
         const user = userEvent.setup();
 
-        // Renderiza a página dentro de um Router para suportar navegação
         render(
             <BrowserRouter>
                 <TransferPage />
             </BrowserRouter>
         );
 
-        // PASSO 1: Identificação do destinatário
-        // Busca o campo pelo texto de ajuda (placeholder) e digita o nome
+        // step 1: Identificação do destinatário
         const titleInput = screen.getByPlaceholderText('Celular, Email, Pix copia e cola...');
         await user.type(titleInput, 'João Silva');
 
@@ -66,8 +64,7 @@ describe('TransferPage', () => {
         const continueButton = screen.getByRole('button', { name: /continuar/i });
         await user.click(continueButton);
 
-        // PASSO 2: Confirmação do destinatário
-        // Aguarda a interface mudar e verifica se o título de confirmação aparece
+        // step 2: Confirmação do destinatário
         await waitFor(() => {
             expect(screen.getByText('Confirme o destinatário')).toBeInTheDocument();
             expect(screen.getByText('João Silva')).toBeInTheDocument();
@@ -77,8 +74,7 @@ describe('TransferPage', () => {
         const confirmRecipientButton = screen.getByRole('button', { name: /confirmar e continuar/i });
         await user.click(confirmRecipientButton);
 
-        // PASSO 3: Definição do valor e Validação visual
-        // Aguarda a interface mudar e verifica se o título e o nome do destinatário aparecem
+        // step 3: Definição do valor e Validação visual
         await waitFor(() => {
             expect(screen.getByText('Quanto você quer transferir?')).toBeInTheDocument();
         });
@@ -87,13 +83,11 @@ describe('TransferPage', () => {
         const amountInput = screen.getByDisplayValue('');
         await user.type(amountInput, '500,00');
 
-        // PASSO 3: Confirmação final
         // Clica no botão de confirmação para finalizar a transferência
         const confirmButton = screen.getByRole('button', { name: /confirmar transferência/i });
         await user.click(confirmButton);
 
         await waitFor(() => {
-            // Se falhar, o Vitest imprime no terminal quantas vezes foi chamado
             console.log("Chamadas do navigate:", mockNavigate.mock.calls);
             expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
             }, { timeout: 3000 }); 
