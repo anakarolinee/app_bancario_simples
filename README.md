@@ -6,6 +6,41 @@ Este é um projeto de desafio frontend para simular uma aplicação bancária si
 
 A aplicação simula um sistema bancário com funcionalidades de login, visualização de saldo e transações, e realização de transferências. É uma SPA (Single Page Application) que utiliza roteamento protegido e persistência de estado.
 
+## 🚀 Instalação
+
+1. Clone o repositório:
+
+   ```bash
+   git clone <url-do-repositorio>
+   cd app_bancario_simples
+   ```
+
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+
+## 📖 Uso
+
+### Login
+
+- Acesse `/login` para fazer login
+- Credenciais são simuladas (qualquer email/nome funcionam)
+
+### Dashboard
+
+- Visualize saldo e transações recentes
+- Acesse via `/dashboard` (rota protegida)
+
+### Transferências
+
+- Realize transferências via `/transfer`
+- Formulário com validação em tempo real
+- Atualização automática do saldo e histórico
+
 ## ✨ Funcionalidades
 
 - **Autenticação de Usuário**: Login com persistência de sessão
@@ -38,7 +73,7 @@ A aplicação simula um sistema bancário com funcionalidades de login, visualiz
 - **Testing Library**: Utilitários para testes de componentes React
 - **@vitejs/plugin-react**: Plugin Vite para React
 
-## � Segurança
+## Segurança
 
 Esta seção descreve medidas de segurança que poderiam ser implementadas para proteger a aplicação contra ameaças comuns, como engenharia reversa e vazamento de dados. Embora não sejam implementadas neste projeto de desafio, elas são essenciais para aplicações em produção.
 
@@ -66,51 +101,18 @@ O vazamento de dados pode ocorrer através de armazenamento inseguro, transmiss�
 
 Essas práticas, combinadas com revisões de segurança regulares e testes de penetração, ajudam a manter a aplicação robusta contra ameaças.
 
-## �📋 Pré-requisitos
+## 📋 Pré-requisitos
 
 - Node.js (versão 18 ou superior)
 - npm ou yarn
 
-## 🚀 Instalação
+```bash
 
-1. Clone o repositório:
-
-   ```bash
-   git clone <url-do-repositorio>
-   cd desafio
+ npm run dev
    ```
 
-2. Instale as dependências:
+Abra [https://app-bancario-simples.vercel.app/] no navegador.
 
-   ```bash
-   npm install
-   ```
-
-3. Inicie o servidor de desenvolvimento:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Abra [https://app-bancario-simples.vercel.app/] no navegador.
-
-## 📖 Uso
-
-### Login
-
-- Acesse `/login` para fazer login
-- Credenciais são simuladas (qualquer email/nome funcionam)
-
-### Dashboard
-
-- Visualize saldo e transações recentes
-- Acesse via `/dashboard` (rota protegida)
-
-### Transferências
-
-- Realize transferências via `/transfer`
-- Formulário com validação em tempo real
-- Atualização automática do saldo e histórico
 
 ## 📜 Scripts Disponíveis
 
@@ -165,7 +167,6 @@ O projeto pode ser expandido com as seguintes melhorias:
 - **Monitoramento**: Integrar ferramentas como Sentry para rastreamento de erros em produção.
 - **Performance**: Implementar lazy loading, code splitting e otimização de imagens.
 - **Acessibilidade**: Melhorar conformidade com WCAG para usuários com deficiências.
-
 
 ## 👥 Autor
 
