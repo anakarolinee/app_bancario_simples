@@ -92,7 +92,7 @@ Essas práticas, combinadas com revisões de segurança regulares e testes de pe
    npm run dev
    ```
 
-4. Abra [https://app-bancario-simples.vercel.app/](http://localhost:5173) no navegador.
+4. Abra [https://app-bancario-simples.vercel.app/] no navegador.
 
 ## 📖 Uso
 
