@@ -23,6 +23,18 @@ A aplicação simula um sistema bancário com funcionalidades de login, visualiz
 
 3. Inicie o servidor de desenvolvimento:
 
+## 📋 Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- npm ou yarn
+
+```bash
+
+ npm run dev
+   ```
+
+Abra [https://app-bancario-simples.vercel.app/] no navegador.
+
 ## 📖 Uso
 
 ### Login
@@ -101,17 +113,6 @@ O vazamento de dados pode ocorrer através de armazenamento inseguro, transmiss�
 
 Essas práticas, combinadas com revisões de segurança regulares e testes de penetração, ajudam a manter a aplicação robusta contra ameaças.
 
-## 📋 Pré-requisitos
-
-- Node.js (versão 18 ou superior)
-- npm ou yarn
-
-```bash
-
- npm run dev
-   ```
-
-Abra [https://app-bancario-simples.vercel.app/] no navegador.
 
 
 ## 📜 Scripts Disponíveis
