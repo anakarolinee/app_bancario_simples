@@ -14,6 +14,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
             {
+                index: true, // <--- ADICIONA ESTA LINHA
+                element: <DashboardPage />,
+            },
+            {
                 path: 'dashboard',
                 element: <DashboardPage />,
             },
@@ -24,7 +28,8 @@ export const router = createBrowserRouter([
         ],
     },
     {
-        path: '*', 
+        path: '*',
         element: <Navigate to="/login" replace />,
     },
 ])
+
