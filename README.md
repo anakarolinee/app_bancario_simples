@@ -113,8 +113,6 @@ O vazamento de dados pode ocorrer através de armazenamento inseguro, transmiss�
 
 Essas práticas, combinadas com revisões de segurança regulares e testes de penetração, ajudam a manter a aplicação robusta contra ameaças.
 
-
-
 ## 📜 Scripts Disponíveis
 
 - `npm run dev` - Inicia o servidor de desenvolvimento
@@ -122,7 +120,6 @@ Essas práticas, combinadas com revisões de segurança regulares e testes de pe
 - `npm run preview` - Visualiza a build de produção localmente
 - `npm run test` - Executa os testes com Vitest
 - `npm run lint` - Executa o linter ESLint
-
 
 ## 🧪 Testes
 
@@ -154,7 +151,7 @@ Durante o desenvolvimento, foram tomadas as seguintes decisões técnicas para g
 - **Estrutura Modular**: Separação clara entre componentes, páginas, stores e utilitários para facilitar manutenção.
 - **Testes com Vitest**: Framework moderno e rápido para testes unitários e de integração.
 
-## 🔮 Melhorias Futuras
+## Melhorias Futuras
 
 O projeto pode ser expandido com as seguintes melhorias:
 
